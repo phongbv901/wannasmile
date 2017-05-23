@@ -48,6 +48,10 @@ public class DeviceService {
         return deviceRepository.findDevicesByOsType(osType);
     }
 
+    public List<Device> findByUser(String userId){
+        return deviceRepository.findDevicesByAccountUid(userId);
+    }
+
     public Integer checkDevice(String osTpye){
         Build build = buildRepository.findBuildByOsTypeOrderByCreatedDate(osTpye);
         Integer count = 0;

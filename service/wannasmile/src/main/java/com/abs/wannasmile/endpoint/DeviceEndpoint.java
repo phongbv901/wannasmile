@@ -23,6 +23,11 @@ public class DeviceEndpoint {
         return deviceService.getDevice(id);
     }
 
+    @RequestMapping(value = "/all/{userId}", method = RequestMethod.GET)
+    public List<Device> getDevices(@PathVariable(name = "userId") String id){
+        return deviceService.findByUser(id);
+    }
+
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String getDevice(@RequestBody Device device){
         return deviceService.createDevice(device);

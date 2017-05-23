@@ -13,4 +13,6 @@ public interface DeviceRepository extends MongoRepository<Device,String>{
     List<Device> findDevicesByOsType(String osType);
 
     List<Device> findDevicesByOsTypeAndAccountUid(String osType, String accountUid);
+
+    List<Device> findDevicesByAccountUid(String accountUid);
 }
