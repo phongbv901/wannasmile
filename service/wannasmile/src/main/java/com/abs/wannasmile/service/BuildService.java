@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by phongbv on 5/22/17.
@@ -34,5 +35,8 @@ public class BuildService {
             return buildRepository.findOne(id);
         }
         return null;
+    }
+    public List<Build> getAll(){
+        return buildRepository.findAll();
     }
 }

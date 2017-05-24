@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Absolute DDS - Admin Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="../css/wannasmile.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" th:href="@{/css/wannasmile.css}" href="../../css/wannasmile.css"/>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#"><img src="../images/absolute-white.svg" height="50" width="100"/></a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#"><img th:src="@{/images/absolute-white.svg}"
+                             src="../static/images/absolute-logo.jpg" height="49" width="223"/></a>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
@@ -60,35 +62,41 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-            <br>
         </div>
 
         <div class="col-sm-9">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUpdateForm">Add new update</button>
-            <button type="button" class="btn btn-secondary btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Force check</button>
+            <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#addUpdateForm">Add new update
+            </button>
+            <button type="button" class="btn btn-secondary btn-danger" data-toggle="tooltip"
+                    data-placement="top" title="Tooltip on top">Force check
+            </button>
             <table class="table table-hover" id="update-list">
                 <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Build Number</th>
+                    <th>OS</th>
+                    <th>Ref Link</th>
+                    <!--<th>Critical</th>-->
+                    <th>Created Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
+                <tr th:each="build: ${buildList}">
+                    <td th:text="${build.osBuild}"></td>
+                    <td th:text="${build.osType}"></td>
+                    <td th:text="${build.refLink}"></td>
+                    <!--<td th:if="${build.urgent}==true ">-->
+                        <!--<a href="#" class="btn btn-danger btn-sm" style="width: 85px;" >-->
+                            <!--<span class="glyphicon glyphicon-alert"></span> Critical-->
+                        <!--</a>-->
+                    <!--</td>-->
+                    <!--<td th:if="${build.urgent}!=true ">-->
+                        <!--<a href="#" class="btn btn-success btn-sm" style="width: 85px;">-->
+                            <!--<span class="glyphicon glyphicon-alert"></span> Minor-->
+                        <!--</a>-->
+                    <!--</td>-->
+                    <td th:text="${build.createdDate}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -105,47 +113,52 @@
                 <h4 class="modal-title">Window Updates information</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="post" th:action="@{/home}" th:object="${build}">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="updateName">Update Name:</label>
+                        <label class="control-label col-sm-2" for="buildName">Build Name:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="updateName" placeholder="Enter Update Name">
+                            <input type="text" class="form-control" id="buildName" th:field="*{osBuild}"
+                                   placeholder="Enter Build Name"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="description">Update Description:</label>
+                        <label class="control-label col-sm-2" for="description">Build
+                            Description:</label>
                         <div class="col-sm-10">
-                            <textarea rows="5" class="form-control" id="description" placeholder="Enter description"></textarea>
+                            <textarea rows="5" class="form-control" id="description" th:field="*{osBuild}"
+                                      placeholder="Enter description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="ostype">OS Type:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="ostype" placeholder="Enter OS type">
+                            <input type="input" class="form-control" id="ostype"
+                                   placeholder="Enter OS type"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="osBuild">OS Build Number:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="osBuild">
+                            <input type="input" class="form-control" id="osBuild"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="checkbox" align="right">
-                           <input type="checkbox" value="1"><span class="label label-danger">Critical Update</span>
+                            <input type="checkbox" value="1"/><span class="label label-danger">Critical Update</span>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="reflink">OS Type:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="reflink">
+                            <input type="input" class="form-control" id="reflink"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="releasedDate">Released Date:</label>
+                        <label class="control-label col-sm-2" for="releasedDate">Released
+                            Date:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="releasedDate">
+                            <input type="input" class="form-control" id="releasedDate"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -167,7 +180,7 @@
 </body>
 </html>
 <script>
-    $( function() {
-        $( "#releasedDate" ).datepicker();
-    } );
+    $(function () {
+        $("#releasedDate").datepicker();
+    });
 </script>
