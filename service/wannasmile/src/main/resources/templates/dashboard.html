@@ -115,50 +115,45 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" th:action="@{/home}" th:object="${build}">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="buildName">Build Name:</label>
+                        <label class="control-label col-sm-2" for="buildName">Build Number:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="buildName" th:field="*{osBuild}"
-                                   placeholder="Enter Build Name"/>
+                                   placeholder="Enter Build Number"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="description">Build
                             Description:</label>
                         <div class="col-sm-10">
-                            <textarea rows="5" class="form-control" id="description" th:field="*{osBuild}"
+                            <textarea rows="5" class="form-control" id="description" th:field="*{desc}"
                                       placeholder="Enter description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="ostype">OS Type:</label>
+                        <label class="control-label col-sm-2" for="osType">OS Type:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="ostype"
-                                   placeholder="Enter OS type"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="osBuild">OS Build Number:</label>
-                        <div class="col-sm-10">
-                            <input type="input" class="form-control" id="osBuild"/>
+                            <input type="text" class="form-control" id="osType" readonly="true"
+                                   placeholder="Windows 10"/>
+
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="checkbox" align="right">
-                            <input type="checkbox" value="1"/><span class="label label-danger">Critical Update</span>
+                            <input type="checkbox" value="" th:field="*{urgent}"/><span class="label label-danger">Critical Update</span>
                         </div>
 
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="reflink">OS Type:</label>
+                        <label class="control-label col-sm-2" for="reflink">Ref Link:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="reflink"/>
+                            <input type="text" class="form-control" id="reflink" th:field="*{refLink}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="releasedDate">Released
                             Date:</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="releasedDate"/>
+                            <input type="text" class="form-control" id="releasedDate" th:field="*{releasedDate}"/>
                         </div>
                     </div>
                     <div class="form-group">

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Absolute DDS - Admin Dashboard</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" th:href="@{/css/wannasmile.css}" href="../../css/wannasmile.css"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#"><img th:src="@{/images/absolute-white.svg}"
+                             src="../static/images/absolute-logo.jpg" height="49" width="223"/></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <h4>Admin Dashboard</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#section1">Dashboard</a></li>
+                <li><a href="#section2">Window U</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="#">Page 1-2</a></li>
+                        <li><a href="#">Page 1-3</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a class="menu-bar" data-toggle="collapse" href="#menu">
+                <span class="bars">xxx</span>
+            </a>
+            <div class="collapse menu" id="menu">
+                <ul class="list-inline">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Works</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#addUpdateForm">Add new update
+            </button>
+            <button type="button" class="btn btn-secondary btn-danger" data-toggle="tooltip"
+                    data-placement="top" title="Tooltip on top">Force check
+            </button>
+            <table class="table table-hover" id="update-list">
+                <thead>
+                <tr>
+                    <th>Device Name</th>
+                    <th>ESN</th>
+                    <th>OS</th>
+                    <th>Current OS Build</th>
+                    <th>Status</th>
+                    <th>Last Check</th>
+                    <th>Required Build info</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="device: ${deviceList}">
+                    <td th:text="${device.deviceId}"></td>
+                    <td th:text="${device.esn}"></td>
+                    <td th:text="${device.osType}"></td>
+                    <td th:text="${device.osBuild}"></td>
+                    <td th:if="${device.updateStatus}==2 ">
+                        <a href="#" class="btn btn-danger btn-sm" style="width: 85px;" >
+                            <span class="glyphicon glyphicon-alert"></span> Critical
+                        </a>
+                    </td>
+                    <td th:if="${device.updateStatus}==1 ">
+                        <a href="#" class="btn btn-success btn-sm" style="width: 85px;">
+                            <span class="glyphicon glyphicon-alert"></span> Minor
+                        </a>
+                    </td>
+                    <td th:if="${device.updateStatus}==0 ">
+                        <a href="#" class="btn btn-info btn-sm" style="width: 85px;" >
+                            <span class="glyphicon glyphicon-alert"></span> Up-to-date
+                        </a>
+                    </td>
+                    <td th:text="${device.lastChecked}"></td>
+                    <td th:text="${device.refBuild}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer class="container-fluid">
+    <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
+<script>
+    $(function () {
+        $("#releasedDate").datepicker();
+    });
+</script>

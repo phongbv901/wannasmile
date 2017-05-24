@@ -77,4 +77,8 @@ public class DeviceService {
         }
         return count;
     }
+
+    public List<Device> getAll(){
+        return deviceRepository.findAll();
+    }
 }

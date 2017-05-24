@@ -14,6 +14,8 @@ public class Build {
     @Id
     private String buildId;
 
+    private String desc;
+
     private String osType;
 
     private String osBuild;
@@ -21,6 +23,8 @@ public class Build {
     private String refLink;
 
     private Boolean isUrgent;
+
+    private Date releasedDate;
 
     private Date createdDate;
 
@@ -35,12 +39,21 @@ public class Build {
         this.buildId = buildId;
     }
 
+
     public String getOsType() {
         return osType;
     }
 
     public void setOsType(String osType) {
         this.osType = osType;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getOsBuild() {
@@ -65,6 +78,14 @@ public class Build {
 
     public void setUrgent(Boolean urgent) {
         isUrgent = urgent;
+    }
+
+    public Date getReleasedDate() {
+        return releasedDate;
+    }
+
+    public void setReleasedDate(Date releasedDate) {
+        this.releasedDate = releasedDate;
     }
 
     public Date getCreatedDate() {
