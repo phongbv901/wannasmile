@@ -84,6 +84,31 @@ public class DeviceService {
         return count;
     }
 
+    public Integer checkOneDevice(String deviceId, String osTpye){
+        Integer count  = 0;
+        if(deviceId != null){
+            Build build = buildRepository.findBuildByOsTypeOrderByCreatedDate(osTpye);
+            String refBuid = build.getBuildId();
+            String osBuild = build.getOsBuild();
+            Integer updateStatus = build.getUrgent() ? 2 : 1;
+            Device device = deviceRepository.findOne(deviceId);
+            if(device != null){
+                device.setLastChecked(new Date());
+                if(device.isOutofDate(osBuild)){
+                    device.setRefBuild(refBuid);
+                    device.setUpdateStatus(updateStatus);
+                    count ++;
+                } else {
+                    device.setUpdateStatus(0);
+                    device.setRefBuild(null);
+                }
+                deviceRepository.save(device);
+            }
+
+        }
+            return count;
+    }
+
     public List<Device> getAll(){
         return deviceRepository.findAll();
     }
