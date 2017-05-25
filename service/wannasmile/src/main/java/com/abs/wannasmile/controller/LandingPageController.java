@@ -8,6 +8,7 @@ import com.abs.wannasmile.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +35,9 @@ public class LandingPageController {
     public ModelAndView showHomePage(Map<String, Object> model, HttpServletRequest request) {
         User user = userService.checkSession(request);
         ModelAndView modelAndView = null;
-        if(user == null || !user.getAdmin()){
+        if(user == null){
+            modelAndView = new ModelAndView("redirect:/login");
+        } else if (!user.getAdmin()){
             modelAndView = new ModelAndView("unauthorized");
         } else {
             modelAndView = new ModelAndView("dashboard");

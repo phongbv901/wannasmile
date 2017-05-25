@@ -33,11 +33,19 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/login");
+        userService.removeSession(request);
+        modelAndView.addObject("user", new User());
+        return modelAndView;
+    }
+
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute("user") User user, HttpServletRequest request) {
         User loggedUser = userService.checkLogin(user.getUserName(), user.getPassword());
         if(loggedUser==null){
-            ModelAndView modelAndView = new ModelAndView("login");
+            ModelAndView modelAndView = new ModelAndView("redirect:/login");
             modelAndView.addObject("error", "message");
             return modelAndView;
         }else{
@@ -50,7 +58,6 @@ public class LoginController {
                 return modelAndView;
             }
         }
-
     }
 
 }

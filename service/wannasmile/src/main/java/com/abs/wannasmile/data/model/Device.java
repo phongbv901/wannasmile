@@ -39,7 +39,7 @@ public class Device {
                 //
                 Integer newNum1 = Integer.parseInt(newBuid[0]);
                 Integer newNum2 = Integer.parseInt(newBuid[1]);
-                if(oldNum1 < newNum1 || (oldNum1 == newNum1 && oldNum2 < newNum2)){
+                if(oldNum1.intValue() < newNum1.intValue() || (oldNum1.intValue() == newNum1.intValue() && oldNum2.intValue() < newNum2.intValue())){
                     return true;
                 }
             }

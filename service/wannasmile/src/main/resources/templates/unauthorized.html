@@ -1,3 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Absolute DDS - Admin Dashboard</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" th:href="@{/css/wannasmile.css}" href="../../css/wannasmile.css"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#"><img th:src="@{/images/absolute-white.svg}"
+                             src="../static/images/absolute-logo.jpg" height="49" width="223"/></a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/wannasmile/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
         <div class="span12">
@@ -6,10 +42,13 @@
                 <br />
                 <p>The page you requested could not be found, either contact your webmaster or try again. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from</p>
                 <p><b>Or you could just press this neat little button:</b></p>
-                <a href="/mydevice" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Take Me Home</a>
+                <a href="wannasmile/mydevice" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Take Me Home</a>
             </div>
     </div>
 </div>
+</div>
+</body>
+</html>
 <style>
     .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}
 </style>
