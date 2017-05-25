@@ -7,9 +7,7 @@ import com.abs.wannasmile.data.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by phongbv on 5/22/17.
@@ -22,6 +20,9 @@ public class DeviceService {
 
     @Autowired
     BuildRepository buildRepository;
+
+    @Autowired
+    UserService userService;
 
     public Device getDevice(String id){
         if(id != null){
@@ -58,6 +59,7 @@ public class DeviceService {
         String refBuid = build.getBuildId();
         String osBuild = build.getOsBuild();
         Integer updateStatus = build.getUrgent() ? 2 : 1;
+        Set<String> userIds = new HashSet<>();
         if(build != null){
             List<Device> devices = deviceRepository.findDevicesByOsType(build.getOsType());
             if(devices != null && !devices.isEmpty()){
@@ -67,6 +69,7 @@ public class DeviceService {
                         device.setRefBuild(refBuid);
                         device.setUpdateStatus(updateStatus);
                         count ++;
+                        userIds.add(device.getAccountUid());
                     } else {
                         device.setUpdateStatus(0);
                         device.setRefBuild(null);
@@ -74,6 +77,9 @@ public class DeviceService {
                     deviceRepository.save(device);
                 }
             }
+        }
+        if(userIds.size() > 0){
+            userService.setUserNoti(userIds);
         }
         return count;
     }
