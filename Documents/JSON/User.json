@@ -1,0 +1,16 @@
+{ 
+    "_id" : ObjectId("59265b6a21ba721048c2fc19"), 
+    "_class" : "com.abs.wannasmile.data.model.User", 
+    "userName" : "swang", 
+    "admin" : true, 
+    "password" : "password", 
+    "haveNoti" : false
+}
+{ 
+    "_id" : ObjectId("59265ba421ba721048c2fc1a"), 
+    "_class" : "com.abs.wannasmile.data.model.User", 
+    "userName" : "user", 
+    "admin" : false, 
+    "password" : "password", 
+    "haveNoti" : false
+}
