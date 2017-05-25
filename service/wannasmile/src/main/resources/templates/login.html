@@ -1,0 +1,164 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.css"/>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#"><img th:src="@{/images/absolute-white.svg}"
+                             src="../static/images/absolute-logo.jpg" height="49" width="223"/></a>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="com-md-12">
+            <div class="notification login-alert">
+                Please Enter Your Username And Password!
+            </div>
+            <div class="notification notification-success logged-out">
+                You logged out successfully!
+            </div>
+            <div class="well welcome-text">
+                Hello, to access our app please <button class="btn btn-default btn-login">Log in</button> or <button class="btn btn-default btn-register" disabled="disabled">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well login-box" style="margin-top: 12%">
+                <form  method="post" th:action="@{/login}" th:object="${user}">
+                    <legend>Login</legend>
+                    <div class="form-group">
+                        <label for="username-email">E-mail or Username</label>
+                        <input id="username-email" placeholder="E-mail or Username" type="text" class="form-control" th:field="*{userName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" placeholder="Password" type="password" class="form-control"  th:field="*{password}"/>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger btn-cancel-action">Cancel</button>
+                        <input type="submit" class="btn btn-success btn-login-submit" value="Login" />
+                    </div>
+                </form>
+            </div>
+            <div class="logged-in well">
+                <h1>You are loged in! <div class="pull-right"><button class="btn-logout btn btn-danger"><span class="glyphicon glyphicon-off"></span> Logout</button></div></h1>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+<script>
+    function varticalCenterStuff() {
+        var windowHeight = $(window).height();
+        var loginBoxHeight = $('.login-box').innerHeight();
+        var welcomeTextHeight = $('.welcome-text').innerHeight();
+        var loggedIn = $('.logged-in').innerHeight();
+
+        var mathLogin = (windowHeight / 2) - (loginBoxHeight / 2);
+        var mathWelcomeText = (windowHeight / 2) - (welcomeTextHeight / 2);
+        var mathLoggedIn = (windowHeight / 2) - (loggedIn / 2);
+        $('.login-box').css('margin-top', mathLogin);
+        $('.welcome-text').css('margin-top', mathWelcomeText);
+        $('.logged-in').css('margin-top', mathLoggedIn);
+    }
+    $(window).resize(function () {
+        varticalCenterStuff();
+    });
+    varticalCenterStuff();
+
+    // awesomeness
+    $('.btn-login').click(function(){
+        $(this).parent().fadeOut(function(){
+            $('.login-box').fadeIn();
+        })
+    });
+
+    $('.btn-cancel-action').click(function(e){
+        e.preventDefault();
+        $(this).parent().parent().parent().fadeOut(function(){
+            $('.welcome-text').fadeIn();
+        })
+    });
+</script>
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+    body {
+        background: -webkit-linear-gradient(90deg, green 10%, #18ba30 90%);
+        background: -moz-linear-gradient(90deg, green 10%, #18ba30 90%);
+        background: -ms-linear-gradient(90deg, green 10%, #18ba30 90%);
+        background: -o-linear-gradient(90deg, green 10%, #18ba30 90%);
+        background: linear-gradient(90deg, green 10%, #18ba30 90%);
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .well{
+        background-color:#fff!important;
+        border-radius:0!important;
+        border:none!important;
+    }
+
+    .well.login-box {
+        width:300px;
+        margin:0 auto;
+        display:none;
+    }
+    .well.login-box legend {
+        font-size:26px;
+        text-align:center;
+        font-weight:300;
+    }
+    .well.login-box label {
+        font-weight:300;
+        font-size:16px;
+
+    }
+    .well.login-box input[type="text"] {
+        box-shadow:none;
+        border-color:#ddd;
+        border-radius:0;
+    }
+
+    .well.welcome-text{
+        font-size:21px;
+    }
+
+    /* Notifications */
+
+    .notification{
+        position:fixed;
+        top: 20px;
+        right:0;
+        background-color:#FF4136;
+        padding: 20px;
+        color: #fff;
+        font-size:21px;
+        display:none;
+    }
+    .notification-success{
+        background-color:#3D9970;
+    }
+
+    .notification-show{
+        display:block!important;
+    }
+
+    /*Loged in*/
+    .logged-in{
+        display:none;
+    }
+    .logged-in h1{
+        margin:0;
+        font-weight:300;
+    }
+</style>

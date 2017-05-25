@@ -46,7 +46,7 @@ public class UserService {
     public void setSession(HttpServletRequest request, User user) {
         if (request != null && user != null) {
             user.setPassword(null);
-            request.setAttribute("user", user);
+            request.getSession().setAttribute("user", user);
         }
     }
 

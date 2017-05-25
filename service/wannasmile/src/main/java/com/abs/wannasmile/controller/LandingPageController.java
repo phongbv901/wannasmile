@@ -35,7 +35,7 @@ public class LandingPageController {
         User user = userService.checkSession(request);
         ModelAndView modelAndView = null;
         if(user == null || !user.getAdmin()){
-            modelAndView = new ModelAndView("login");
+            modelAndView = new ModelAndView("unauthorized");
         } else {
             modelAndView = new ModelAndView("dashboard");
             modelAndView.addObject("buildList", buildService.getAll());

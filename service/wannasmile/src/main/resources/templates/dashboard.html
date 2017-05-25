@@ -25,6 +25,7 @@
             </button>
             <a href="#"><img th:src="@{/images/absolute-white.svg}"
                              src="../static/images/absolute-logo.jpg" height="49" width="223"/></a>
+
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
@@ -35,7 +36,7 @@
 </nav>
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav">
+        <div class="col-sm-3 sidenav" style="width: 15%">
             <h4>Admin Dashboard</h4>
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#section1">Dashboard</a></li>
@@ -50,28 +51,17 @@
                     </ul>
                 </li>
             </ul>
-            <a class="menu-bar" data-toggle="collapse" href="#menu">
-                <span class="bars">xxx</span>
-            </a>
-            <div class="collapse menu" id="menu">
-                <ul class="list-inline">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Works</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
         </div>
-
-        <div class="col-sm-9">
-            <button type="button" class="btn btn-success" data-toggle="modal"
-                    data-target="#addUpdateForm">Add new update
-            </button>
-            <button type="button" class="btn btn-secondary btn-danger" data-toggle="tooltip"
-                    data-placement="top" title="Tooltip on top">Force check
-            </button>
-            <table class="table table-hover" id="update-list">
+        <div class="col-sm-10">
+            <form class="form-horizontal" method="post" th:action="@{/check}">
+                <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#addUpdateForm">Add new update
+                </button>
+                <button type="submit" class="btn btn-secondary btn-danger" data-toggle="tooltip"
+                        data-placement="top" title="Tooltip on top">Force check
+                </button>
+            </form>
+            <table class="table table-hover" id="update-list" style="width: 110%">
                 <thead>
                 <tr>
                     <th>Build Number</th>

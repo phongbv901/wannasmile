@@ -30,8 +30,8 @@ public class MyDeviceController {
     public ModelAndView showHomePage(Map<String, Object> model, HttpServletRequest request) {
         User user = userService.checkSession(request);
         ModelAndView modelAndView = null;
-        if(user == null || !user.getAdmin()){
-            modelAndView = new ModelAndView("login");
+        if(user == null || user.getAdmin()){
+            modelAndView = new ModelAndView("redirect:/login");
         } else {
             modelAndView = new ModelAndView("mydevice");
             modelAndView.addObject("deviceList", deviceService.getAll());
