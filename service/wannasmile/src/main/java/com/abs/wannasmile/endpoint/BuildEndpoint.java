@@ -15,7 +15,7 @@ import java.util.List;
  * Created by phongbv on 5/22/17.
  */
 @RestController
-@RequestMapping("/build")
+@RequestMapping("/build2")
 public class BuildEndpoint {
 
     @Autowired

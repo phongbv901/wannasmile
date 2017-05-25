@@ -1,0 +1,42 @@
+<div id="content" class="form-horizontal">
+<div class="form-group">
+    <label class="control-label col-sm-2" for="buildName">Build Number:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="buildName" th:value="*{build.osBuild}" disabled="true"
+               placeholder="Enter Build Number"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="description">Build
+        Description:</label>
+    <div class="col-sm-10">
+        <textarea rows="5" class="form-control" id="description"
+                  th:text="*{build.desc}" disabled="true"></textarea>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="osType">OS Type:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="osType" readonly="true" th:value="*{build.osType}" disabled="true"/>
+
+    </div>
+</div>
+<div class="form-group">
+    <div class="checkbox" align="right">
+        <input type="checkbox" value="" th:value="*{build.urgent}" disabled="true"/><span class="label label-danger">Critical Update</span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="reflink">Ref Link:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="reflink" th:value="*{build.refLink}" disabled="true"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="releasedDate">Released
+        Date:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="releasedDate" th:value="*{build.releasedDate}" disabled="true"/>
+    </div>
+</div>
+</div>

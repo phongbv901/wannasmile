@@ -60,4 +60,12 @@ public class LandingPageController {
         deviceService.checkDevice("Windows 10");
         return "redirect:/home";
     }
+
+    @RequestMapping(value = "/build/{buildId}", method = RequestMethod.GET)
+    public ModelAndView getBuild(@PathVariable(name = "buildId") String builId) {
+        ModelAndView modelAndView = new ModelAndView("popup_body");
+        Build build = buildService.getBuild(builId);
+        modelAndView.addObject("build",build);
+        return modelAndView;
+    }
 }

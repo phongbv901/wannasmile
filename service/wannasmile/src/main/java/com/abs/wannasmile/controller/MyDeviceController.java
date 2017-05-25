@@ -42,5 +42,4 @@ public class MyDeviceController {
         deviceService.checkOneDevice(deviceId, "Windows 10");
         return "redirect:/mydevice";
     }
-
 }
