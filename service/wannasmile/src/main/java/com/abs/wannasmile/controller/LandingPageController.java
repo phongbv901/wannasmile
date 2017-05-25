@@ -2,7 +2,9 @@ package com.abs.wannasmile.controller;
 
 import com.abs.wannasmile.data.model.Build;
 
+import com.abs.wannasmile.data.model.User;
 import com.abs.wannasmile.service.DeviceService;
+import com.abs.wannasmile.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.abs.wannasmile.service.BuildService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -24,11 +27,21 @@ public class LandingPageController {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
-    public ModelAndView showHomePage(Map<String, Object> model) {
-        ModelAndView modelAndView = new ModelAndView("dashboard");
-        modelAndView.addObject("buildList", buildService.getAll());
-        modelAndView.addObject("build", new Build());
+    public ModelAndView showHomePage(Map<String, Object> model, HttpServletRequest request) {
+        User user = userService.checkSession(request);
+        ModelAndView modelAndView = null;
+        if(user == null || !user.getAdmin()){
+            modelAndView = new ModelAndView("login");
+        } else {
+            modelAndView = new ModelAndView("dashboard");
+            modelAndView.addObject("buildList", buildService.getAll());
+            modelAndView.addObject("build", new Build());
+        }
+
         return modelAndView;
     }
 
