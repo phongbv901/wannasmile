@@ -29,7 +29,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/wannasmile/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href="/wannasmile/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -68,14 +68,14 @@
                     <th>OS</th>
                     <th>Ref Link</th>
                     <!--<th>Critical</th>-->
-                    <th>Created Date</th>
+                    <th>Released Date</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="build: ${buildList}">
                     <td th:text="${build.osBuild}"></td>
                     <td th:text="${build.osType}"></td>
-                    <td th:text="${build.refLink}"></td>
+                    <td><a th:href="${build.refLink}" th:text="${build.refLink}"></a></td>
                     <!--<td th:if="${build.urgent}==true ">-->
                         <!--<a href="#" class="btn btn-danger btn-sm" style="width: 85px;" >-->
                             <!--<span class="glyphicon glyphicon-alert"></span> Critical-->
@@ -86,7 +86,7 @@
                             <!--<span class="glyphicon glyphicon-alert"></span> Minor-->
                         <!--</a>-->
                     <!--</td>-->
-                    <td th:text="${build.createdDate}"></td>
+                    <td th:text="${build.releasedDate}"></td>
                 </tr>
                 </tbody>
             </table>

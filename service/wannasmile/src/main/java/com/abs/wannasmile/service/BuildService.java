@@ -21,10 +21,14 @@ public class BuildService {
     @Autowired
     BuildRepository buildRepository;
 
+    @Autowired
+    DeviceService deviceService;
+
    public String createBuild(Build build){
        if(build != null){
            build.setCreatedDate(new Date());
            build = buildRepository.save(build);
+           deviceService.checkDevice(build.getOsType());
            return build.getBuildId();
        }
        return null;

@@ -33,7 +33,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/wannasmile/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href="/wannasmile/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -95,13 +95,13 @@
                         </a>
                     </td>
                     <td th:if="${device.updateStatus}==1 ">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 85px;">
+                        <a href="#" class="btn btn-warning btn-sm" style="width: 85px;">
                             <span class="glyphicon glyphicon-alert"></span> Minor
                         </a>
                     </td>
                     <td th:if="${device.updateStatus}==0 ">
-                        <a href="#" class="btn btn-info btn-sm" style="width: 85px;" >
-                            <span class="glyphicon glyphicon-alert"></span> Up-to-date
+                        <a href="#" class="btn btn-success btn-sm" style="width: 85px;" >
+                            <span class="glyphicon glyphicon-check"></span> Updated
                         </a>
                     </td>
                     <td th:text="${device.lastChecked}"></td>
@@ -119,7 +119,7 @@
                                th:if="${device.updateStatus}==2">
                                 <span class="glyphicon glyphicon-refresh"></span> Recheck Request
                             </a>
-                            <a href="#" class="btn btn-warning btn-sm" style="width: 85px;">
+                            <a th:if="${device.updateStatus}!=0" href="#" class="btn btn-warning btn-sm" style="width: 85px; margin-bottom: 5px">
                                 <span class="glyphicon glyphicon-envelope"></span> Email
                             </a>
                         </div>
@@ -160,8 +160,10 @@
 
         if (notify ==true) {
             $(function () {
-                $.bootstrapGrowl('We do have the Kapua suite available at ', {
-                    type: 'danger'
+                $.bootstrapGrowl("You have devices with Security Leak, please check immediately before someone could take advantage!", {
+                    type: 'danger',
+                    delay: 9999994000,
+                    allow_dismiss: true
                 });
                 notify = false;
             });

@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface BuildRepository extends MongoRepository<Build,String> {
 
-    Build findBuildByOsTypeOrderByCreatedDate(String osType);
+    Build findBuildByOsTypeOrderByReleasedDate(String osType);
 }

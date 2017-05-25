@@ -32,7 +32,7 @@ public class MyDeviceController {
             modelAndView = new ModelAndView("redirect:/login");
         } else {
             modelAndView = new ModelAndView("mydevice");
-            modelAndView.addObject("deviceList", deviceService.getAll());
+            modelAndView.addObject("deviceList", deviceService.findByUser(user.getId()));
         }
         return modelAndView;
     }
