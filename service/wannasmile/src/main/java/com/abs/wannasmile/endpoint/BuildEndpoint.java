@@ -2,8 +2,10 @@ package com.abs.wannasmile.endpoint;
 
 import com.abs.wannasmile.data.model.Build;
 import com.abs.wannasmile.data.model.Device;
+import com.abs.wannasmile.data.model.User;
 import com.abs.wannasmile.service.BuildService;
 import com.abs.wannasmile.service.DeviceService;
+import com.abs.wannasmile.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,9 @@ public class BuildEndpoint {
     @Autowired
     BuildService buildService;
 
+    @Autowired
+    UserService userService;
+
 
 
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -29,6 +34,12 @@ public class BuildEndpoint {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Build getDevice(@PathVariable(name = "id") String id){
         return buildService.getBuild(id);
+    }
+
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public String createUser(@RequestBody User user){
+         userService.createUser(user);
+        return "ok";
     }
 
 }
