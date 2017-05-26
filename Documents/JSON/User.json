@@ -1,5 +1,5 @@
 { 
-    "_id" : ObjectId("59265b6a21ba721048c2fc19"), 
+    "_id" : ObjectId("5923de72ddcdce0479564000"), 
     "_class" : "com.abs.wannasmile.data.model.User", 
     "userName" : "swang", 
     "admin" : true, 
@@ -7,7 +7,7 @@
     "haveNoti" : false
 }
 { 
-    "_id" : ObjectId("59265ba421ba721048c2fc1a"), 
+    "_id" : ObjectId("5923de72ddcdce0479564001"), 
     "_class" : "com.abs.wannasmile.data.model.User", 
     "userName" : "user", 
     "admin" : false, 
